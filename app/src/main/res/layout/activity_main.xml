@@ -9,18 +9,18 @@
 
     <Button
         android:id="@+id/btn6"
-        android:layout_width="103dp"
-        android:layout_height="103dp"
-        android:background="@drawable/my_button_bg"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_below="@id/btn9"
         android:layout_toRightOf="@id/btn5"
+        android:background="@drawable/my_button_bg"
         android:text="6"
         android:textSize="24sp" />
 
     <Button
         android:id="@+id/btn3"
-        android:layout_width="103dp"
-        android:layout_height="103dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_below="@id/btn6"
         android:layout_toRightOf="@id/btn2"
         android:background="@drawable/my_button_bg"
@@ -29,8 +29,8 @@
 
     <Button
         android:id="@+id/btn4"
-        android:layout_width="103dp"
-        android:layout_height="103dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_below="@id/btn7"
         android:background="@drawable/my_button_bg"
         android:text="4"
@@ -38,8 +38,8 @@
 
     <Button
         android:id="@+id/btn9"
-        android:layout_width="103dp"
-        android:layout_height="103dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_below="@id/btnpercentage"
         android:layout_toRightOf="@id/btn8"
         android:background="@drawable/my_button_bg"
@@ -48,8 +48,8 @@
 
     <Button
         android:id="@+id/btnplus"
-        android:layout_width="103dp"
-        android:layout_height="103dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_below="@id/btnminus"
         android:layout_toRightOf="@id/btn3"
         android:background="@drawable/my_button_bg"
@@ -59,8 +59,8 @@
 
     <Button
         android:id="@+id/btnequals"
-        android:layout_width="103dp"
-        android:layout_height="103dp"
+        android:layout_width="170dp"
+        android:layout_height="80dp"
         android:layout_below="@id/btnplus"
         android:layout_toRightOf="@id/btndot"
         android:background="@drawable/my_button_bg1"
@@ -70,8 +70,8 @@
 
     <Button
         android:id="@+id/btn5"
-        android:layout_width="103dp"
-        android:layout_height="103dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_below="@id/btn8"
         android:layout_toRightOf="@id/btn4"
         android:background="@drawable/my_button_bg"
@@ -80,8 +80,8 @@
 
     <Button
         android:id="@+id/btntimes"
-        android:layout_width="103dp"
-        android:layout_height="103dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_below="@id/btndiv"
         android:layout_toRightOf="@id/btn9"
         android:background="@drawable/my_button_bg"
@@ -91,8 +91,8 @@
 
     <Button
         android:id="@+id/btn7"
-        android:layout_width="103dp"
-        android:layout_height="103dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_below="@id/btnclear"
         android:background="@drawable/my_button_bg"
         android:text="7"
@@ -100,11 +100,11 @@
 
     <Button
         android:id="@+id/btndiv"
-        android:layout_width="103dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_below="@id/textprimary"
-        android:layout_toRightOf="@id/btnpercentage"
         android:layout_marginTop="27dp"
-        android:layout_height="103dp"
+        android:layout_toRightOf="@id/btnpercentage"
         android:background="@drawable/my_button_bg"
         android:text="/"
         android:textColor="#0055FF"
@@ -112,8 +112,8 @@
 
     <Button
         android:id="@+id/btnminus"
-        android:layout_width="103dp"
-        android:layout_height="103dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_below="@id/btntimes"
         android:layout_toRightOf="@id/btn6"
         android:background="@drawable/my_button_bg"
@@ -123,69 +123,72 @@
 
     <Button
         android:id="@+id/btn8"
-        android:layout_width="103dp"
-        android:layout_height="103dp"
-        android:background="@drawable/my_button_bg"
-        android:layout_toRightOf="@id/btn7"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_below="@id/btninverse"
+        android:layout_toRightOf="@id/btn7"
+        android:background="@drawable/my_button_bg"
         android:text="8"
         android:textSize="24sp" />
 
     <Button
         android:id="@+id/btnclear"
-        android:layout_width="103dp"
-        android:layout_height="103dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_below="@id/textprimary"
         android:layout_marginTop="27dp"
         android:background="@drawable/my_button_bg"
         android:text="C"
         android:textColor="#FF0000"
         android:textSize="24sp" />
+
     <Button
         android:id="@+id/btninverse"
-        android:layout_width="103dp"
-        android:layout_height="103dp"
-        android:background="@drawable/my_button_bg"
-        android:layout_toRightOf="@id/btnclear"
-        android:layout_marginTop="27dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_below="@id/textprimary"
+        android:layout_marginTop="27dp"
+        android:layout_toRightOf="@id/btnclear"
+        android:background="@drawable/my_button_bg"
         android:text="1/x"
         android:textColor="#000000"
         android:textSize="24sp" />
+
     <Button
         android:id="@+id/btnminusplus"
-        android:layout_width="103dp"
-        android:layout_height="103dp"
-        android:background="@drawable/my_button_bg"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_below="@id/btn1"
+        android:background="@drawable/my_button_bg"
         android:text="-/+"
         android:textColor="#000000"
         android:textSize="24sp" />
+
     <Button
         android:id="@+id/btnpercentage"
-        android:layout_width="103dp"
-        android:layout_height="103dp"
-        android:background="@drawable/my_button_bg"
-        android:layout_toRightOf="@id/btninverse"
-        android:layout_marginTop="27dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_below="@id/textprimary"
+        android:layout_marginTop="27dp"
+        android:layout_toRightOf="@id/btninverse"
+        android:background="@drawable/my_button_bg"
         android:text="%"
         android:textColor="#000000"
         android:textSize="24sp" />
 
     <Button
         android:id="@+id/btn1"
-        android:layout_width="103dp"
-        android:layout_height="103dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_below="@id/btn4"
         android:background="@drawable/my_button_bg"
         android:text="1"
-        android:textSize="24sp"/>
+        android:textSize="24sp" />
 
     <Button
         android:id="@+id/btn0"
-        android:layout_width="103dp"
-        android:layout_height="103dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_below="@id/btn2"
         android:layout_toRightOf="@id/btnminusplus"
         android:background="@drawable/my_button_bg"
@@ -194,8 +197,8 @@
 
     <Button
         android:id="@+id/btn2"
-        android:layout_width="103dp"
-        android:layout_height="103dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_below="@id/btn5"
         android:layout_toRightOf="@id/btn1"
         android:background="@drawable/my_button_bg"
@@ -204,8 +207,8 @@
 
     <Button
         android:id="@+id/btndot"
-        android:layout_width="103dp"
-        android:layout_height="103dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_below="@id/btn3"
         android:layout_toRightOf="@id/btn0"
         android:background="@drawable/my_button_bg"

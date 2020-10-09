@@ -1,7 +1,9 @@
 package com.example.mycalculator;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +19,11 @@ public class MainActivity extends AppCompatActivity {
     TextView screen;
     float val1,val2;
     boolean add, minus, times, div, equals;
+    boolean operatorPressed = false, isResult = false, firstOperatorPressed = false;
 
+    public void  memory(){
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,177 +52,272 @@ public class MainActivity extends AppCompatActivity {
         buttonpercentage = (Button) findViewById(R.id.btnpercentage);
 
         screen = (TextView) findViewById(R.id.textprimary);
+        screen.setText("0");
 
         buttonclear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View V) {
-                screen.setText(null);
+                screen.setText("0");
                 add = false;
                 minus = false;
                 times = false;
                 div = false;
                 equals = false;
-
+                isResult = false;
             }
         });
         buttondot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View V) {
-                screen.setText(screen.getText() + ".");
+                numberClicked(".");
 
             }
         });
         button0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View V) {
-                screen.setText(screen.getText() + "0");
+                numberClicked("0");
 
             }
         });
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View V) {
-                screen.setText(screen.getText() + "1");
+                numberClicked("1");
 
             }
         });
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View V) {
-                screen.setText(screen.getText() + "2");
+                numberClicked("2");
 
             }
         });
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View V) {
-                screen.setText(screen.getText() + "3");
+                numberClicked("3");
 
             }
         });
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View V) {
-                screen.setText(screen.getText() + "4");
+                numberClicked("4");
 
             }
         });
         button5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View V) {
-                screen.setText(screen.getText() + "5");
+                numberClicked("5");
 
             }
         });
         button6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View V) {
-                screen.setText(screen.getText() + "6");
+                numberClicked("6");
 
             }
         });
         button7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View V) {
-                screen.setText(screen.getText() + "7");
+                numberClicked("7");
 
             }
         });
         button8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View V) {
-                screen.setText(screen.getText() + "8");
+                numberClicked("8");
 
             }
         });
         button9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View V) {
-                screen.setText(screen.getText() + "9");
+                numberClicked("9");
 
             }
         });
         buttonplus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View V) {
-                if(screen == null) {
-                    screen.setText(null);
-                }
-
-                val1 = Float.parseFloat(screen.getText() + " ");
-
-                add = true;
-                screen.setText(null);
+                operatorClicked("add");
 
             }
         });
         buttonminus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View V) {
-                if(screen == null) {
-                    screen.setText(null);
-                }
-
-                val1 = Float.parseFloat(screen.getText() + " ");
-
-                minus = true;
-                screen.setText(null);
+                operatorClicked("minus");
 
             }
         });
         buttontimes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View V) {
-                if(screen == null) {
-                    screen.setText(null);
-                }
-
-                val1 = Float.parseFloat(screen.getText() + " ");
-
-                times = true;
-                screen.setText(null);
+                operatorClicked("times");
 
             }
         });
         buttondiv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View V) {
-                if(screen == null) {
-                    screen.setText(null);
-                }
-
-                val1 = Float.parseFloat(screen.getText() + " ");
-
-                div = true;
-                screen.setText(null);
-
+                operatorClicked("div");
             }
         });
         buttonequals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View V) {
-                equals = true;
-                val2 = Float.parseFloat(screen.getText() + " ");
+                if (add || minus || div || times || isResult) {
+                    equals = true;
 
-                if (add) {
-                    screen.setText((val1 + val2) + " ");
-                    add = false;
-                }
-                if (minus) {
-                    screen.setText((val1 - val2) + " ");
-                    minus = false;
-                }
-                if (div) {
-                    screen.setText((val1/val2) + " ");
-                    div = false;
-                }
-                if (times) {
-                    screen.setText((val1*val2) + " ");
-                    times = false;
-                }
+                    if(operatorPressed){
+                        val2 = val1 = Float.parseFloat(resetEdit());
+                        operatorPressed = false;
+                        resetButtonAppearance();
+                    }
+                    else if (isResult){
+                        resetEdit();
+                    }
+                    else{
+                        val2 = Float.parseFloat(resetEdit());
+                    }
 
+                    doOperation();
+
+                    isResult = true;
+                    firstOperatorPressed = false;
+                }
             }
         });
 
+    }
+
+    private void doOperation(){
+        float result = 0;
+
+        if (add) {
+            result = val1 + val2;
+        }
+        else if (minus) {
+            result = val1 - val2;
+        }
+        else if (div) {
+            result = val1 / val2;
+        }
+        else if (times) {
+            result = val1 * val2;
+        }
+
+        val1 = result;
+
+        if(result - (int)result != 0){
+            addToEdit(String.valueOf(result));
+        }
+        else{
+            addToEdit((String.valueOf((int)result)));
+        }
+
+        firstOperatorPressed = true;
+    }
+
+    private void addToEdit(String s){
+        String initialValue = screen.getText().toString();
+
+        if (initialValue != null && initialValue.trim().equals("0")){
+            initialValue = "";
+        }
+
+        screen.setText(initialValue + s);
+    }
+
+    private String resetEdit(){
+        String currentText = screen.getText().toString();
+        screen.setText("0");
+
+        return currentText;
+    }
+
+    private void numberClicked(String s){
+        if (isResult){
+            isResult = false;
+            resetEdit();
+        }
+        else if (operatorPressed){
+            String value = resetEdit();
+
+            if (value != null && !value.trim().isEmpty()){
+                val1 = Float.parseFloat(value);
+            }
+
+            operatorPressed = false;
+            resetButtonAppearance();
+        }
+
+        addToEdit(s);
+    }
+
+    private void operatorClicked(String s){
+        isResult = false;
+        Button button = button0;
+
+        if(screen == null) {
+            screen.setText(null);
+        }
+
+        if (firstOperatorPressed && !operatorPressed){
+            val2 = Float.parseFloat(resetEdit());
+            doOperation();
+        }
+        else {
+            firstOperatorPressed = true;
+        }
+
+        add = false;
+        minus = false;
+        div = false;
+        times = false;
+
+        switch (s){
+            case "add":
+                add = true;
+                button = buttonplus;
+                break;
+            case "minus":
+                minus = true;
+                button = buttonminus;
+                break;
+            case "div":
+                div = true;
+                button = buttondiv;
+                break;
+            case "times":
+                button = buttontimes;
+                times = true;
+        }
+
+        if (operatorPressed){
+            resetButtonAppearance();
+        }
+
+        if (button != button0) {
+            button.getBackground().setColorFilter(ContextCompat.getColor(this, R.color.colorAccent), PorterDuff.Mode.MULTIPLY);
+        }
+
+        operatorPressed = true;
+    }
+
+    private void resetButtonAppearance(){
+        Button[] operatorButtons =
+                {buttondiv, buttonminus, buttontimes, buttonplus, buttonpercentage, buttoninverse};
+
+        for (Button button: operatorButtons){
+            button.getBackground().clearColorFilter();
+        }
     }
 }

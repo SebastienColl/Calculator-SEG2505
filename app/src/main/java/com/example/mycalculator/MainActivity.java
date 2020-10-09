@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View V) {
                 numberClicked(".");
-                //screen.setText(screen.getText() + ".");
 
             }
         });
@@ -78,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View V) {
                 numberClicked("0");
-                //screen.setText(screen.getText() + "0");
 
             }
         });
@@ -86,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View V) {
                 numberClicked("1");
-                //screen.setText(screen.getText() + "1");
 
             }
         });
@@ -94,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View V) {
                 numberClicked("2");
-                //screen.setText(screen.getText() + "2");
 
             }
         });
@@ -102,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View V) {
                 numberClicked("3");
-                //screen.setText(screen.getText() + "3");
 
             }
         });
@@ -110,7 +105,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View V) {
                 numberClicked("4");
-                //screen.setText(screen.getText() + "4");
 
             }
         });
@@ -118,7 +112,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View V) {
                 numberClicked("5");
-                //screen.setText(screen.getText() + "5");
 
             }
         });
@@ -126,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View V) {
                 numberClicked("6");
-                //screen.setText(screen.getText() + "6");
 
             }
         });
@@ -134,7 +126,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View V) {
                 numberClicked("7");
-                //screen.setText(screen.getText() + "7");
 
             }
         });
@@ -142,7 +133,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View V) {
                 numberClicked("8");
-                //screen.setText(screen.getText() + "8");
 
             }
         });
@@ -150,7 +140,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View V) {
                 numberClicked("9");
-                //screen.setText(screen.getText() + "9");
 
             }
         });
@@ -158,14 +147,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View V) {
                 operatorClicked("add");
-                /*if(screen == null) {
-                    screen.setText(null);
-                }
-
-                val1 = Float.parseFloat(screen.getText() + " ");
-
-                add = true;
-                screen.setText(null);*/
 
             }
         });
@@ -173,14 +154,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View V) {
                 operatorClicked("minus");
-                /*if(screen == null) {
-                    screen.setText(null);
-                }
-
-                val1 = Float.parseFloat(screen.getText() + " ");
-
-                minus = true;
-                screen.setText(null);*/
 
             }
         });
@@ -188,14 +161,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View V) {
                 operatorClicked("times");
-                /*if(screen == null) {
-                    screen.setText(null);
-                }
-
-                val1 = Float.parseFloat(screen.getText() + " ");
-
-                times = true;
-                screen.setText(null);*/
 
             }
         });
@@ -203,15 +168,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View V) {
                 operatorClicked("div");
-                /*if(screen == null) {
-                    screen.setText(null);
-                }
-
-                val1 = Float.parseFloat(screen.getText() + " ");
-
-                div = true;
-                screen.setText(null);*/
-
             }
         });
         buttonequals.setOnClickListener(new View.OnClickListener() {
@@ -247,19 +203,15 @@ public class MainActivity extends AppCompatActivity {
 
         if (add) {
             result = val1 + val2;
-            //screen.setText((val1 + val2) + " ");
         }
         else if (minus) {
             result = val1 - val2;
-            //screen.setText((val1 - val2) + " ");
         }
         else if (div) {
             result = val1 / val2;
-            //screen.setText((val1 / val2) + " ");
         }
         else if (times) {
             result = val1 * val2;
-            //screen.setText((val1 * val2) + " ");
         }
 
         val1 = result;

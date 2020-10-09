@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
            buttonminusplus, buttonpercentage;
     TextView screen;
     float val1,val2;
-    boolean add, minus, times, div, equals;
+    boolean add, minus, times, div, equals, inverse, minusplus, percentage;
     boolean operatorPressed = false, isResult = false, firstOperatorPressed = false;
 
     public void  memory(){
@@ -64,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
                 div = false;
                 equals = false;
                 isResult = false;
+                inverse = false;
+                minusplus = false;
+                percentage = false;
             }
         });
         buttondot.setOnClickListener(new View.OnClickListener() {
@@ -170,10 +173,26 @@ public class MainActivity extends AppCompatActivity {
                 operatorClicked("div");
             }
         });
+        buttoninverse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View V) {
+                operatorClicked("inverse");
+            }
+        });
+        buttonminusplus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View V) { operatorClicked("minusplus");
+            }
+        });
+        buttonpercentage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View V) { operatorClicked("percentage");
+            }
+        });
         buttonequals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View V) {
-                if (add || minus || div || times || isResult) {
+                if (add || minus || div || times || isResult || inverse || minusplus || percentage) {
                     equals = true;
 
                     if(operatorPressed){
@@ -212,6 +231,15 @@ public class MainActivity extends AppCompatActivity {
         }
         else if (times) {
             result = val1 * val2;
+        }
+        else if (inverse) {
+            result = 1/val2;
+        }
+        else if (minusplus) {
+            result = val2 * -1;
+        }
+        else if (percentage) {
+            result = val2 / 100;
         }
 
         val1 = result;
@@ -282,6 +310,9 @@ public class MainActivity extends AppCompatActivity {
         minus = false;
         div = false;
         times = false;
+        inverse = false;
+        minusplus = false;
+        percentage = false;
 
         switch (s){
             case "add":
@@ -299,6 +330,19 @@ public class MainActivity extends AppCompatActivity {
             case "times":
                 button = buttontimes;
                 times = true;
+                break;
+            case "inverse":
+                button = buttoninverse;
+                inverse = true;
+                break;
+            case "minusplus":
+                button = buttonminusplus;
+                minusplus = true;
+                break;
+            case "percentage":
+                button = buttonpercentage;
+                percentage = true;
+                break;
         }
 
         if (operatorPressed){
@@ -314,7 +358,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void resetButtonAppearance(){
         Button[] operatorButtons =
-                {buttondiv, buttonminus, buttontimes, buttonplus, buttonpercentage, buttoninverse};
+                {buttondiv, buttonminus, buttontimes, buttonplus, buttonpercentage, buttoninverse, buttonminusplus};
 
         for (Button button: operatorButtons){
             button.getBackground().clearColorFilter();

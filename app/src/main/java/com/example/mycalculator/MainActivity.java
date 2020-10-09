@@ -18,6 +18,10 @@ public class MainActivity extends AppCompatActivity {
     float val1,val2;
     boolean add, minus, times, div, equals;
 
+    public void  memory(){
+
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

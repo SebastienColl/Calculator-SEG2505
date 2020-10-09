@@ -21,6 +21,10 @@ public class MainActivity extends AppCompatActivity {
     boolean add, minus, times, div, equals;
     boolean operatorPressed = false, isResult = false, firstOperatorPressed = false;
 
+    public void  memory(){
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
            buttonminusplus, buttonpercentage;
     TextView screen;
     float val1,val2;
-    boolean add, minus, times, div, equals, inverse, minusplus, percentage;
+    boolean add, minus, times, div, equals, inverse, minusplus, percentage, clear;
     boolean operatorPressed = false, isResult = false, firstOperatorPressed = false;
 
     public void  memory(){
@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 inverse = false;
                 minusplus = false;
                 percentage = false;
+                clear = true;
             }
         });
         buttondot.setOnClickListener(new View.OnClickListener() {
@@ -181,7 +182,40 @@ public class MainActivity extends AppCompatActivity {
         });
         buttonminusplus.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View V) { operatorClicked("minusplus");
+            public void onClick(View V) { // doesn't work if it is the first operation to be pressed
+                    minusplus = true;
+
+                    if(operatorPressed){ // operatorClicked changes operatorPressed to true for when 3+=
+                        val2 = Float.parseFloat(resetEdit());
+                        operatorPressed = false;
+                        resetButtonAppearance();
+                    }
+
+                    if (firstOperatorPressed) {
+                        val2 = val2 * -1;
+                        resetEdit();
+                        if(val2 - (int)val2 != 0){
+                            addToEdit(String.valueOf(val2));
+                        }
+                        else{
+                            addToEdit((String.valueOf((int)val2)));
+                        }
+                    }
+                    else {
+                        val1 = val1 * -1;
+                        resetEdit();
+                        if(val1 - (int)val1 != 0){
+                            addToEdit(String.valueOf(val1));
+                        }
+                        else{
+                            addToEdit((String.valueOf((int)val1)));
+                        }
+                    }
+
+
+                    isResult = true; // done operation, current number is the result
+                    firstOperatorPressed = false; // assuming no operations done
+
             }
         });
         buttonpercentage.setOnClickListener(new View.OnClickListener() {
@@ -192,25 +226,25 @@ public class MainActivity extends AppCompatActivity {
         buttonequals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View V) {
-                if (add || minus || div || times || isResult || inverse || minusplus || percentage) {
-                    equals = true;
+                if (add || minus || div || times || isResult || inverse || minusplus || percentage) { // if any of these are true from operatorClicked
+                    equals = true; // equals = true
 
-                    if(operatorPressed){
+                    if(operatorPressed){ // operatorClicked changes operatorPressed to true for when 3+=
                         val2 = val1 = Float.parseFloat(resetEdit());
                         operatorPressed = false;
                         resetButtonAppearance();
                     }
-                    else if (isResult){
+                    else if (isResult){ // case for when you double click the equal sign
                         resetEdit();
                     }
-                    else{
+                    else{ //set val2 to the most recent number
                         val2 = Float.parseFloat(resetEdit());
                     }
 
                     doOperation();
 
-                    isResult = true;
-                    firstOperatorPressed = false;
+                    isResult = true; // done operation, current number is the result
+                    firstOperatorPressed = false; // assuming no operations done
                 }
             }
         });
@@ -237,12 +271,13 @@ public class MainActivity extends AppCompatActivity {
         }
         else if (minusplus) {
             result = val2 * -1;
+            resetEdit();
         }
         else if (percentage) {
-            result = val2 / 100;
+            result = val2 / 100; //operations
         }
 
-        val1 = result;
+        val1 = result; // val1 becomes the result
 
         if(result - (int)result != 0){
             addToEdit(String.valueOf(result));
@@ -264,7 +299,7 @@ public class MainActivity extends AppCompatActivity {
         screen.setText(initialValue + s);
     }
 
-    private String resetEdit(){
+    private String resetEdit(){ // returns what is currently on the screen
         String currentText = screen.getText().toString();
         screen.setText("0");
 
@@ -275,6 +310,10 @@ public class MainActivity extends AppCompatActivity {
         if (isResult){
             isResult = false;
             resetEdit();
+        }
+        else if (clear){
+            val1 = val2 = Float.parseFloat(s);
+            clear = false;
         }
         else if (operatorPressed){
             String value = resetEdit();
@@ -311,7 +350,6 @@ public class MainActivity extends AppCompatActivity {
         div = false;
         times = false;
         inverse = false;
-        minusplus = false;
         percentage = false;
 
         switch (s){
@@ -335,14 +373,11 @@ public class MainActivity extends AppCompatActivity {
                 button = buttoninverse;
                 inverse = true;
                 break;
-            case "minusplus":
-                button = buttonminusplus;
-                minusplus = true;
-                break;
             case "percentage":
-                button = buttonpercentage;
-                percentage = true;
-                break;
+                    button = buttonpercentage;
+                    percentage = true;
+                    break;
+
         }
 
         if (operatorPressed){

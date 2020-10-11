@@ -276,8 +276,13 @@ public class MainActivity extends AppCompatActivity {
     private void addToEdit(String s){
         String initialValue = screen.getText().toString();
 
-        if (initialValue != null && initialValue.trim().equals("0")){
+        if (initialValue != null && initialValue.trim().equals("0") && s != "."){
             initialValue = "";
+        }
+        else if (s == "."){
+            if (initialValue.contains(".")){
+                return;
+            }
         }
 
         screen.setText(initialValue + s);

@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     TextView primaryScreen;
     float val1,val2;
     boolean add, minus, times, div, equals, clear;
-    boolean operatorPressed = false, isResult = false, firstOperatorPressed = false;
+    boolean operatorPressed = false, isResult = false, firstOperatorPressed = false, pressedDirectResult = false;
 
     public void  memory(){
 
@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Getting all the buttons on the screen
         button0 = (Button) findViewById(R.id.btn0);
         button1 = (Button) findViewById(R.id.btn1);
         button2 = (Button) findViewById(R.id.btn2);
@@ -51,9 +52,14 @@ public class MainActivity extends AppCompatActivity {
         buttonminusplus = (Button) findViewById(R.id.btnminusplus);
         buttonpercentage = (Button) findViewById(R.id.btnpercentage);
 
+        //Setting up the text screen
         primaryScreen = (TextView) findViewById(R.id.textprimary);
         primaryScreen.setText(null);
 
+        //Setting up the listeners for all buttons
+
+        //Set screen text to 0
+        //Resetting the appropriate booleans
         buttonclear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View V) {
@@ -63,11 +69,13 @@ public class MainActivity extends AppCompatActivity {
                 times = false;
                 div = false;
                 equals = false;
-                isResult = false;
                 clear = true;
+                pressedDirectResult = false;
                 resetButtonAppearance();
             }
         });
+
+        //Adding the number, or dot, pressed to the screen
         buttondot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View V) {
@@ -145,6 +153,9 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        //Registrering which operator was pressed
+        //Compute a result when necessary
         buttonplus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View V) {
@@ -172,6 +183,8 @@ public class MainActivity extends AppCompatActivity {
                 operatorClicked("div");
             }
         });
+
+        //Inverse the number on the screen
         buttoninverse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View V) {
@@ -185,8 +198,12 @@ public class MainActivity extends AppCompatActivity {
                 else {
                     addToEdit(String.valueOf((int)current));
                 }
+
+                pressedDirectResult = true;
             }
         });
+
+        //Add or remove the negative sign
         buttonminusplus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View V) {
@@ -203,6 +220,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        //Divides the number on the screen by 100
         buttonpercentage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View V) {
@@ -216,14 +235,19 @@ public class MainActivity extends AppCompatActivity {
                 else {
                     addToEdit(String.valueOf((int)current));
                 }
+
+                pressedDirectResult = true;
             }
         });
+
+        //Computes the operation asked by the user and display result on screen
         buttonequals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View V) {
                 if (add || minus || div || times || isResult) {
                     equals = true;
 
+                    //Setting up the variables accordingly to the situation
                     if(operatorPressed){
                         val2 = val1 = Float.parseFloat(resetEdit());
                         operatorPressed = false;
@@ -236,6 +260,7 @@ public class MainActivity extends AppCompatActivity {
                         val2 = Float.parseFloat(resetEdit());
                     }
 
+                    //Compute and show result
                     doOperation();
 
                     isResult = true;
@@ -246,6 +271,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //Compute and Show result
     private void doOperation(){
         float result = 0;
 
@@ -274,6 +300,8 @@ public class MainActivity extends AppCompatActivity {
         firstOperatorPressed = true;
     }
 
+    //Add the string to the screen
+    //Resets the screen before hand if there's only a 0
     private void addToEdit(String s){
         String initialValue = primaryScreen.getText().toString();
 
@@ -289,6 +317,7 @@ public class MainActivity extends AppCompatActivity {
         primaryScreen.setText(initialValue + s);
     }
 
+    //Set the screen to 0 and return the initial value
     private String resetEdit(){ 
         String currentText = primaryScreen.getText().toString();
         primaryScreen.setText("0");
@@ -296,9 +325,11 @@ public class MainActivity extends AppCompatActivity {
         return currentText;
     }
 
+    //Reset the screen when necessary and add number or dot to it
     private void numberClicked(String s){
-        if (isResult){
+        if (isResult || pressedDirectResult){
             isResult = false;
+            pressedDirectResult = false;
             resetEdit();
         }
         else if (clear){
@@ -319,8 +350,11 @@ public class MainActivity extends AppCompatActivity {
         addToEdit(s);
     }
 
+    //Set the appropriate variables depending on the pressed operator
     private void operatorClicked(String s){
         isResult = false;
+        pressedDirectResult = false;
+
         Button button = button0;
 
         if(primaryScreen == null) {
@@ -370,6 +404,7 @@ public class MainActivity extends AppCompatActivity {
         operatorPressed = true;
     }
 
+    //Resets the appearance of all operators buttons
     private void resetButtonAppearance(){
         Button[] operatorButtons =
                 {buttondiv, buttonminus, buttontimes, buttonplus, buttonpercentage, buttoninverse, buttonminusplus};

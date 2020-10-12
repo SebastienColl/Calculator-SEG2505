@@ -16,9 +16,9 @@ public class MainActivity extends AppCompatActivity {
            buttonplus, buttonminus, buttondiv, buttontimes,
            buttonequals, buttondot, buttonclear, buttoninverse,
            buttonminusplus, buttonpercentage;
-    TextView screen;
+    TextView primaryScreen;
     float val1,val2;
-    boolean add, minus, times, div, equals, inverse, minusplus, percentage, clear;
+    boolean add, minus, times, div, equals, clear;
     boolean operatorPressed = false, isResult = false, firstOperatorPressed = false;
 
     public void  memory(){
@@ -51,13 +51,13 @@ public class MainActivity extends AppCompatActivity {
         buttonminusplus = (Button) findViewById(R.id.btnminusplus);
         buttonpercentage = (Button) findViewById(R.id.btnpercentage);
 
-        screen = (TextView) findViewById(R.id.textprimary);
-        screen.setText("0");
+        primaryScreen = (TextView) findViewById(R.id.textprimary);
+        primaryScreen.setText(null);
 
         buttonclear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View V) {
-                screen.setText("0");
+                primaryScreen.setText(null);
                 add = false;
                 minus = false;
                 times = false;
@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 equals = false;
                 isResult = false;
                 clear = true;
+                resetButtonAppearance();
             }
         });
         buttondot.setOnClickListener(new View.OnClickListener() {
@@ -174,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
         buttoninverse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View V) {
-                float current = Float.parseFloat(screen.getText() + " ");
+                float current = Float.parseFloat(primaryScreen.getText() + " ");
                 current = 1/current;
                 resetEdit();
 
@@ -190,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View V) {
 
-                float current = Float.parseFloat(screen.getText() + " ");
+                float current = Float.parseFloat(primaryScreen.getText() + " ");
                 current = current *-1;
                 resetEdit();
 
@@ -205,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
         buttonpercentage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View V) {
-                float current = Float.parseFloat(screen.getText() + " ");
+                float current = Float.parseFloat(primaryScreen.getText() + " ");
                 current = current/100;
                 resetEdit();
 
@@ -274,7 +275,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addToEdit(String s){
-        String initialValue = screen.getText().toString();
+        String initialValue = primaryScreen.getText().toString();
 
         if (initialValue != null && initialValue.trim().equals("0") && s != "."){
             initialValue = "";
@@ -285,12 +286,12 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        screen.setText(initialValue + s);
+        primaryScreen.setText(initialValue + s);
     }
 
     private String resetEdit(){ 
-        String currentText = screen.getText().toString();
-        screen.setText("0");
+        String currentText = primaryScreen.getText().toString();
+        primaryScreen.setText("0");
 
         return currentText;
     }
@@ -322,8 +323,8 @@ public class MainActivity extends AppCompatActivity {
         isResult = false;
         Button button = button0;
 
-        if(screen == null) {
-            screen.setText(null);
+        if(primaryScreen == null) {
+            primaryScreen.setText(null);
         }
 
         if (firstOperatorPressed && !operatorPressed){
@@ -338,8 +339,6 @@ public class MainActivity extends AppCompatActivity {
         minus = false;
         div = false;
         times = false;
-        inverse = false;
-        percentage = false;
 
         switch (s){
             case "add":

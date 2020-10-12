@@ -11,22 +11,16 @@
     android:weightSum="7">
 
     <TextView
-        android:id="@+id/textsecondary"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="#80C35A38"
-        android:gravity="right|end"
-        android:layout_weight="0.5"
-        android:textSize="32sp" />
-    <TextView
         android:id="@+id/textprimary"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_below="@id/textsecondary"
         android:background="#80C35A38"
         android:gravity="right|end"
-        android:layout_weight="1"
-        android:textSize="32sp" />
+        android:layout_weight="1.5"
+        android:textSize="56sp"
+        android:paddingRight="15dp"
+        android:paddingTop="30dp"
+        android:layout_gravity="center"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
